@@ -17,7 +17,7 @@ app.config['CORS_SUPPORTS_CREDENTIALS'] = True
 # Initialize CORS AFTER config set
 cors = CORS(app, resources={
     r"/api/*": {
-        "origins": "http://localhost:3000",
+        "origins": "https://ml-hackethon-cyberbullying-1.onrender.com",
         "methods": ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
         "allow_headers": ["Content-Type", "Authorization", "X-Requested-With", "Accept", "Origin", "Cookie"],
         "supports_credentials": True,
