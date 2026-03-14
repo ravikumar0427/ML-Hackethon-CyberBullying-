@@ -5,7 +5,7 @@ import axios from "axios";
  If .env variable exists it will use that
  otherwise it will use localhost
 */
-const API_URL = process.env.REACT_APP_API_URL || "https://ml-hackethon-cyberbullying.onrender.com/api";
+const API_URL = process.env.REACT_APP_API_URL || "https://ml-hackethon-cyberbullying-1.onrender.com/api";
 
 const api = axios.create({
   baseURL: API_URL,
