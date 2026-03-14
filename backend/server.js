@@ -5,7 +5,10 @@ const fs = require("fs");
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: ["https://ml-hackethon-cyberbullying.onrender.com", "https://leafy-tarsier-cde67f.netlify.app"],
+  credentials: true
+}));
 app.use(express.json());
 
 /* =========================
