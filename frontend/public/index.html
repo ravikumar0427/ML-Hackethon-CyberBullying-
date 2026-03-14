@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <meta name="theme-color" content="#8B5CF6" />
+    <meta name="description" content="Advanced AI-Powered Cyberbullying Detection System - Creating safer online spaces with real-time content analysis" />
+    
+    <!-- Primary Meta Tags -->
+    <title>SafeSpace AI | Cyberbullying Detection System</title>
+    <meta name="title" content="SafeSpace AI - Cyberbullying Detection & Prevention Platform">
+    <meta name="description" content="Protect your online community with our advanced AI-powered cyberbullying detection system. Real-time analysis, instant alerts, and comprehensive protection.">
+    <meta name="keywords" content="cyberbullying detection, AI safety, online protection, content moderation, safe space, bullying prevention">
+    <meta name="author" content="SafeSpace AI">
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://safespace-ai.com">
+    <meta property="og:title" content="SafeSpace AI - Cyberbullying Detection System">
+    <meta property="og:description" content="Advanced AI-powered platform for detecting and preventing cyberbullying in real-time">
+    <meta property="og:image" content="https://safespace-ai.com/og-image.jpg">
+    <meta property="og:site_name" content="SafeSpace AI">
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:url" content="https://safespace-ai.com">
+    <meta property="twitter:title" content="SafeSpace AI - Cyberbullying Detection">
+    <meta property="twitter:description" content="AI-powered platform for safer online communities">
+    <meta property="twitter:image" content="https://safespace-ai.com/twitter-image.jpg">
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome Icons (for loading screen) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Manifest -->
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            overflow: hidden;
+        }
+        
+        /* Elegant Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #8B5CF6 100%);
+            background-size: 200% 200%;
+            animation: gradientShift 8s ease infinite;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            transition: opacity 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        @keyframes gradientShift {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        
+        .loading-content {
+            text-align: center;
+            color: white;
+            padding: 2rem;
+            max-width: 600px;
+            animation: fadeInUp 1s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Animated Logo Container */
+        .logo-container {
+            margin-bottom: 2.5rem;
+            position: relative;
+        }
+        
+        .logo-icon {
+            font-size: 4.5rem;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.2));
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .logo-shield {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 100px;
+            height: 100px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+            animation: pulse 2s ease infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: translate(-50%, -50%) scale(1); opacity: 0.5; }
+            50% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.2; }
+        }
+        
+        .loading-title {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 0.5rem;
+            letter-spacing: -1px;
+            background: linear-gradient(to right, #ffffff, #e0e7ff);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            animation: titleGlow 2s ease-in-out infinite;
+        }
+        
+        @keyframes titleGlow {
+            0%, 100% { text-shadow: 0 2px 20px rgba(255, 255, 255, 0.2); }
+            50% { text-shadow: 0 2px 30px rgba(255, 255, 255, 0.5); }
+        }
+        
+        .loading-subtitle {
+            font-family: 'Inter', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            letter-spacing: 0.3px;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        
+        /* Elegant Spinner */
+        .spinner-container {
+            margin: 2.5rem 0;
+        }
+        
+        .loading-spinner {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 20px;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            border-top-color: white;
+            border-right-color: white;
+            border-radius: 50%;
+            animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Progress Bar */
+        .progress-container {
+            width: 300px;
+            height: 4px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            margin: 2rem auto;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .progress-bar {
+            height: 100%;
+            background: linear-gradient(90deg, #fff, #e0e7ff);
+            border-radius: 10px;
+            width: 0%;
+            animation: progress 2s ease-in-out infinite;
+        }
+        
+        @keyframes progress {
+            0% { width: 0%; margin-left: 0%; }
+            50% { width: 100%; margin-left: 0%; }
+            100% { width: 100%; margin-left: 100%; }
+        }
+        
+        /* Loading Stats */
+        .loading-stats {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        
+        .stat-item {
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .stat-label {
+            font-size: 0.8rem;
+            opacity: 0.8;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        /* Background Particles */
+        .particles {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 0;
+        }
+        
+        .particle {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: particleFloat linear infinite;
+        }
+        
+        @keyframes particleFloat {
+            from {
+                transform: translateY(100vh) scale(0);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(-100vh) scale(1);
+                opacity: 0.5;
+            }
+        }
+        
+        /* Quotes */
+        .quote-container {
+            margin-top: 2rem;
+            font-style: italic;
+            opacity: 0.8;
+            font-size: 0.95rem;
+            transition: opacity 0.3s;
+        }
+        
+        .quote-text {
+            margin-bottom: 0.3rem;
+        }
+        
+        .quote-author {
+            font-size: 0.8rem;
+            opacity: 0.6;
+        }
+        
+        /* Loading Tips */
+        .loading-tip {
+            margin-top: 2rem;
+            font-size: 0.9rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            display: inline-block;
+            backdrop-filter: blur(10px);
+            animation: tipPulse 2s ease infinite;
+        }
+        
+        @keyframes tipPulse {
+            0%, 100% { background: rgba(255, 255, 255, 0.1); }
+            50% { background: rgba(255, 255, 255, 0.2); }
+        }
+        
+        .loading-tip i {
+            margin-right: 0.5rem;
+        }
+        
+        /* Fade Out Animation */
+        .loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* Version Badge */
+        .version-badge {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 0.7rem;
+            opacity: 0.3;
+            color: white;
+            letter-spacing: 1px;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .loading-title {
+                font-size: 2.5rem;
+            }
+            
+            .loading-subtitle {
+                font-size: 1rem;
+            }
+            
+            .loading-stats {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+            
+            .progress-container {
+                width: 250px;
+            }
+            
+            .version-badge {
+                bottom: 10px;
+                right: 10px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .loading-title {
+                font-size: 2rem;
+            }
+            
+            .logo-icon {
+                font-size: 3.5rem;
+            }
+            
+            .loading-tip {
+                font-size: 0.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Elegant Loading Screen -->
+    <div id="loading-screen" class="loading-screen">
+        <!-- Background Particles -->
+        <div class="particles" id="particles"></div>
+        
+        <div class="loading-content">
+            <div class="logo-container">
+                <i class="fas fa-shield-hal logo-icon"></i>
+                <div class="logo-shield"></div>
+            </div>
+            
+            <h1 class="loading-title">SafeSpace AI</h1>
+            <p class="loading-subtitle">Creating safer online communities through advanced AI</p>
+            
+            <div class="spinner-container">
+                <div class="loading-spinner"></div>
+            </div>
+            
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div>
+            
+            <div class="loading-stats">
+                <div class="stat-item">
+                    <div class="stat-number">99.9%</div>
+                    <div class="stat-label">Accuracy</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5M+</div>
+                    <div class="stat-label">Messages</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">Real-time</div>
+                    <div class="stat-label">Detection</div>
+                </div>
+            </div>
+            
+            <div class="quote-container" id="quote-container">
+                <div class="quote-text" id="quote-text">"Technology should protect, not harm."</div>
+                <div class="quote-author" id="quote-author">- SafeSpace AI</div>
+            </div>
+            
+            <div class="loading-tip" id="loading-tip">
+                <i class="fas fa-lightbulb"></i>
+                <span id="tip-text">Analyzing patterns to keep you safe...</span>
+            </div>
+        </div>
+        
+        <div class="version-badge">
+            v2.0.0 | AI-Powered
+        </div>
+    </div>
+
+    <!-- React Root Element -->
+    <div id="root"></div>
+
+    <script>
+        // Array of inspiring quotes about online safety and kindness
+        const quotes = [
+            { text: "Be the reason someone feels safe online.", author: "Digital Kindness" },
+            { text: "Technology is best when it brings people together.", author: "Matt Mullenweg" },
+            { text: "Our mission is to create a safer digital world for everyone.", author: "SafeSpace AI" },
+            { text: "Kindness is the language which the deaf can hear and the blind can see.", author: "Mark Twain" },
+            { text: "Your words have power. Use them to lift others up.", author: "Cyber Wellness" },
+            { text: "Building bridges, not walls, in the digital space.", author: "Online Safety" },
+            { text: "Protecting the vulnerable in our online communities.", author: "Digital Rights" },
+            { text: "Every message matters. Make yours count for good.", author: "SafeSpace" },
+            { text: "Creating a world where everyone can express themselves safely.", author: "Our Vision" },
+            { text: "AI with heart, protecting with purpose.", author: "Tech for Good" }
+        ];
+
+        // Array of loading tips
+        const tips = [
+            "AI models are loading...",
+            "Analyzing language patterns...",
+            "Preparing safety protocols...",
+            "Calibrating detection algorithms...",
+            "Loading ethical AI framework...",
+            "Connecting to secure servers...",
+            "Initializing protection systems...",
+            "Warming up neural networks...",
+            "Loading kindness database...",
+            "Preparing real-time analyzers..."
+        ];
+
+        // Create particles
+        function createParticles() {
+            const particlesContainer = document.getElementById('particles');
+            const particleCount = 30;
+            
+            for (let i = 0; i < particleCount; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                
+                // Random size between 2px and 6px
+                const size = Math.random() * 4 + 2;
+                particle.style.width = `${size}px`;
+                particle.style.height = `${size}px`;
+                
+                // Random position
+                particle.style.left = `${Math.random() * 100}%`;
+                
+                // Random animation duration
+                const duration = Math.random() * 10 + 10;
+                particle.style.animation = `particleFloat ${duration}s linear infinite`;
+                particle.style.animationDelay = `${Math.random() * -20}s`;
+                
+                particlesContainer.appendChild(particle);
+            }
+        }
+
+        // Rotate quotes every 4 seconds
+        function rotateQuotes() {
+            const quoteElement = document.getElementById('quote-text');
+            const authorElement = document.getElementById('quote-author');
+            let index = 0;
+            
+            setInterval(() => {
+                index = (index + 1) % quotes.length;
+                quoteElement.style.opacity = '0';
+                authorElement.style.opacity = '0';
+                
+                setTimeout(() => {
+                    quoteElement.textContent = `"${quotes[index].text}"`;
+                    authorElement.textContent = `- ${quotes[index].author}`;
+                    quoteElement.style.opacity = '1';
+                    authorElement.style.opacity = '1';
+                }, 300);
+                
+                // Fade effect
+                quoteElement.style.transition = 'opacity 0.3s';
+                authorElement.style.transition = 'opacity 0.3s';
+            }, 4000);
+        }
+
+        // Rotate tips every 3 seconds
+        function rotateTips() {
+            const tipElement = document.getElementById('tip-text');
+            let index = 0;
+            
+            setInterval(() => {
+                index = (index + 1) % tips.length;
+                tipElement.style.opacity = '0';
+                
+                setTimeout(() => {
+                    tipElement.textContent = tips[index];
+                    tipElement.style.opacity = '1';
+                }, 300);
+                
+                tipElement.style.transition = 'opacity 0.3s';
+            }, 3000);
+        }
+
+        // Simulate progress (for visual effect)
+        function simulateProgress() {
+            const progressBar = document.querySelector('.progress-bar');
+            let progress = 0;
+            
+            const interval = setInterval(() => {
+                progress += Math.random() * 10;
+                if (progress > 100) progress = 100;
+                progressBar.style.width = `${progress}%`;
+                
+                if (progress === 100) {
+                    clearInterval(interval);
+                }
+            }, 500);
+        }
+
+        // Hide loading screen when React is ready
+        function hideLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                loadingScreen.classList.add('fade-out');
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                    document.body.style.overflow = 'auto';
+                }, 800);
+            }
+        }
+
+        // Initialize everything when page loads
+        window.addEventListener('load', () => {
+            createParticles();
+            rotateQuotes();
+            rotateTips();
+            simulateProgress();
+            
+            // Hide loading screen after React loads
+            setTimeout(hideLoadingScreen, 2500); // Adjust timing as needed
+        });
+
+        // Fallback: hide after 5 seconds if React doesn't load
+        setTimeout(hideLoadingScreen, 5000);
+
+        // Check for browser compatibility
+        (function() {
+            var isIE = /*@cc_on!@*/false || !!document.documentMode;
+            var isOldEdge = !isIE && !!window.StyleMedia;
+            
+            if (isIE || isOldEdge) {
+                var warning = document.createElement('div');
+                warning.style.cssText = `
+                    position: fixed;
+                    top: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: #ff4757;
+                    color: white;
+                    text-align: center;
+                    padding: 15px 30px;
+                    border-radius: 50px;
+                    z-index: 10000;
+                    font-family: 'Inter', sans-serif;
+                    box-shadow: 0 10px 30px rgba(255, 71, 87, 0.3);
+                    animation: slideDown 0.5s ease;
+                `;
+                warning.innerHTML = '⚠️ For the best experience, please use Chrome, Firefox, or Edge';
+                document.body.appendChild(warning);
+                
+                setTimeout(() => {
+                    warning.style.opacity = '0';
+                    setTimeout(() => warning.remove(), 500);
+                }, 5000);
+            }
+        })();
+
+        // Add slide down animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes slideDown {
+                from {
+                    transform: translate(-50%, -100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translate(-50%, 0);
+                    opacity: 1;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
